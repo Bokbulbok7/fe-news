@@ -1,15 +1,15 @@
 import axios from "axios";
 
+const api = axios.create({ baseURL: `https://news-4iag.onrender.com/api` });
+
 export const getArticles = () => {
-  const baseUrl = `https://news-4iag.onrender.com/api/articles`;
-  return axios.get(baseUrl).then((response) => {
+  return api.get("/articles").then((response) => {
     return response.data.articles;
   });
 };
 
 export const getTopics = () => {
-  const baseUrl = `https://news-4iag.onrender.com/api/topics`;
-  return axios.get(baseUrl).then((response) => {
+  return api.get("/topics").then((response) => {
     return response.data.topics;
   });
 };

@@ -155,7 +155,7 @@ input:focus {
   color: #555;
 }
 
-.article-image img {
+.article-image {
   max-width: 100%;
   height: auto;
   border-radius: 5px;

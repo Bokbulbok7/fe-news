@@ -11,18 +11,22 @@ const Article = ({ article }) => {
     <div className="Article">
       <h3 className="article-title">{article.title}</h3>
       <p className="article-info">
-        <span className="article-author">By: {article.author}</span>
-        <span className="article-date">Published: {formattedDate}</span>
-        <span className="article-topic">Topic: {article.topic}</span>
+        <label className="article-author">By: {article.author}</label>
+        <label className="article-date">Published: {formattedDate}</label>
+        <label className="article-topic">Topic: {article.topic}</label>
       </p>
-      <div className="article-image">
-        <img src={article.article_img_url} alt="Article Image" />
-      </div>
+      <img
+        className="article-image"
+        src={article.article_img_url}
+        alt="Article Image"
+      />
       <p className="article-reviews">
-        <span className="article_votes">Number of votes: {article.votes}</span>
-        <span className="article_comments">
+        <label className="article_votes">
+          Number of votes: {article.votes}
+        </label>
+        <label className="article_comments">
           Comments: {article.comment_count}
-        </span>
+        </label>
       </p>
     </div>
   );
