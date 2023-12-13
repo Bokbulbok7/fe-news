@@ -1,4 +1,8 @@
-export const Comment = ({ comment }) => {
+export const Comment = ({ comment, onDeleteComment, deleting }) => {
+  const handleDelete = () => {
+    onDeleteComment(comment.comment_id);
+  };
+
   return (
     <div className="Comment">
       <p className="username">By: {comment.author}</p>
@@ -7,6 +11,9 @@ export const Comment = ({ comment }) => {
       <p className="comment-date">
         Created at: {new Date(comment.created_at).toLocaleString()}
       </p>
+      <button onClick={handleDelete}>
+        {deleting ? "Deleting..." : "Delete"}
+      </button>
     </div>
   );
 };

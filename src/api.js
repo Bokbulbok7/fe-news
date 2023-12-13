@@ -45,3 +45,15 @@ export const postComment = (articleId, newComment) => {
       throw error;
     });
 };
+
+export const deleteComment = (commentId) => {
+  return api
+    .delete(`/comments/${commentId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error deleting comment:", error);
+      throw error;
+    });
+};
