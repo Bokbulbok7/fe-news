@@ -24,12 +24,19 @@ export const ArticlePage = () => {
   if (isLoading) {
     return <h3>Loading...</h3>;
   }
-
+  const formattedDate = new Date(article.created_at).toLocaleDateString(
+    "en-UK",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
   return (
     <div className="ArticlePage">
       <h1>{article.title}</h1>
       <p>By: {article.author}</p>
-      <p>Published: {article.created_at}</p>
+      <p>Published: {formattedDate}</p>
       <p>Topic: {article.topic}</p>
       <img src={article.article_img_url} alt="Article" />
       <p>{article.body}</p>

@@ -272,3 +272,9 @@ input:focus {
   color: #888;
   font-size: 0.85em;
 }
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+

@@ -1,5 +1,4 @@
 export const Comment = ({ comment }) => {
-  console.log(comment);
   return (
     <div className="Comment">
       <p className="username">By: {comment.author}</p>
