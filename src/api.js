@@ -15,14 +15,9 @@ export const getTopics = () => {
 };
 
 export const getArticleById = (articleId) => {
-  return api
-    .get(`/articles/${articleId}`)
-    .then((response) => {
-      return response.data.article;
-    })
-    .catch((error) => {
-      throw error;
-    });
+  return api.get(`/articles/${articleId}`).then((response) => {
+    return response.data.article;
+  });
 };
 
 export const getCommentsByArticleId = (articleId) => {
