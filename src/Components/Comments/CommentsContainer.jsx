@@ -6,7 +6,6 @@ import { getCommentsByArticleId, postComment } from "../../api"; // Replace with
 export const CommentContainer = ({ articleId }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  //const [offlineError, setOfflineError] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -32,12 +31,6 @@ export const CommentContainer = ({ articleId }) => {
       username: defaultUsername,
       ...newComment,
     };
-
-    // if (!navigator.onLine) {
-    //   setOfflineError(true);
-    //   console.error("Cannot add comment while offline.");
-    //   return;
-    // }
 
     postComment(articleId, commentWithUsername)
       .then((postedComment) => {
