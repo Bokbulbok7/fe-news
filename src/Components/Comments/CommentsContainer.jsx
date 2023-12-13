@@ -6,7 +6,8 @@ import { getCommentsByArticleId, postComment } from "../../api"; // Replace with
 export const CommentContainer = ({ articleId }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [offlineError, setOfflineError] = useState(false);
+  //const [offlineError, setOfflineError] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,11 +33,11 @@ export const CommentContainer = ({ articleId }) => {
       ...newComment,
     };
 
-    if (!navigator.onLine) {
-      setOfflineError(true);
-      console.error("Cannot add comment while offline.");
-      return;
-    }
+    // if (!navigator.onLine) {
+    //   setOfflineError(true);
+    //   console.error("Cannot add comment while offline.");
+    //   return;
+    // }
 
     postComment(articleId, commentWithUsername)
       .then((postedComment) => {
@@ -44,6 +45,7 @@ export const CommentContainer = ({ articleId }) => {
       })
       .catch((error) => {
         console.error("Error adding comment:", error);
+        setError("Something went wrong. Please try again later.");
       });
   };
 
@@ -51,9 +53,7 @@ export const CommentContainer = ({ articleId }) => {
     <div className="CommentContainer">
       <h2>Comments</h2>
       <AddComment onAddComment={handleAddComment} />
-      {offlineError && (
-        <p className="error-message">Cannot add comment while offline.</p>
-      )}
+      {error && <p className="error-message">{error}</p>}
       {comments.length > 0 ? (
         comments.map((comment) => (
           <Comment key={comment.comment_id} comment={comment} />
