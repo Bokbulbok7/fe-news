@@ -13,3 +13,14 @@ export const getTopics = () => {
     return response.data.topics;
   });
 };
+
+export const getArticleById = (articleId) => {
+  return api
+    .get(`/articles/${articleId}`)
+    .then((response) => {
+      return response.data.article;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

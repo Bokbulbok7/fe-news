@@ -186,3 +186,26 @@ input:focus {
     grid-template-columns: repeat(4, 1fr); 
   }
 }
+
+.ArticlePage {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.ArticlePage h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.ArticlePage p {
+  margin-bottom: 8px;
+}
+
+.ArticlePage img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+}

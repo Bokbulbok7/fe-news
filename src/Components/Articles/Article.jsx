@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Article = ({ article }) => {
   const formattedDate = new Date(article.created_at).toLocaleDateString(
     "en-UK",
@@ -9,7 +11,9 @@ const Article = ({ article }) => {
   );
   return (
     <div className="Article">
-      <h3 className="article-title">{article.title}</h3>
+      <h3 className="article-title">
+        <Link to={`/articles/${article.article_id}`}>{article.title}</Link>
+      </h3>
       <p className="article-info">
         <label className="article-author">By: {article.author}</label>
         <label className="article-date">Published: {formattedDate}</label>
