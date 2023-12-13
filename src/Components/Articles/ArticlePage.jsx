@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "../../api";
+import { CommentContainer } from "../Comments/CommentsContainer";
 
 export const ArticlePage = () => {
   const { articleId } = useParams();
@@ -34,6 +35,7 @@ export const ArticlePage = () => {
       <p>{article.body}</p>
       <p>Number of votes: {article.votes}</p>
       <p>Comments: {article.comment_count}</p>
+      <CommentContainer articleId={article.article_id} />
     </div>
   );
 };

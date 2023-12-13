@@ -209,3 +209,66 @@ input:focus {
   height: auto;
   margin-bottom: 12px;
 }
+
+.CommentContainer {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.CommentContainer h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.AddComment {
+  margin-bottom: 15px;
+}
+
+.AddComment textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.AddComment button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.AddComment button:hover {
+  background-color: #0056b3;
+}
+
+.Comment {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.Comment p {
+  margin: 0;
+  color: #333;
+}
+
+.Comment .username {
+  font-weight: bold;
+}
+
+.Comment .comment-body {
+  margin-top: 5px;
+}
+
+.Comment .comment-date {
+  color: #888;
+  font-size: 0.85em;
+}
