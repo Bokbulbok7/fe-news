@@ -15,12 +15,33 @@ export const getTopics = () => {
 };
 
 export const getArticleById = (articleId) => {
+  return api.get(`/articles/${articleId}`).then((response) => {
+    return response.data.article;
+  });
+};
+
+export const getCommentsByArticleId = (articleId) => {
   return api
-    .get(`/articles/${articleId}`)
+    .get(`/articles/${articleId}/comments`)
     .then((response) => {
-      return response.data.article;
+      return response.data.comments;
     })
     .catch((error) => {
+      console.error("Error fetching comments:", error);
+      throw error;
+    });
+};
+
+export const postComment = (articleId, newComment) => {
+  console.log(articleId, newComment);
+  return api
+    .post(`/articles/${articleId}/comments`, newComment)
+    .then((response) => {
+      console.log("Comment added:", response.data);
+      return response.data.comment;
+    })
+    .catch((error) => {
+      console.error("Error adding comment:", error);
       throw error;
     });
 };
