@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Comment } from "./Comment";
 import { AddComment } from "./AddComment";
-import { deleteComment, getCommentsByArticleId, postComment } from "../../api"; // Replace with your API functions
+import { deleteComment, getCommentsByArticleId, postComment } from "../../api";
+import { UserContext } from "../Users/UserContext";
 
 export const CommentContainer = ({ articleId }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+  const loggedInUser = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,7 +46,7 @@ export const CommentContainer = ({ articleId }) => {
   };
 
   const handleDeleteComment = (commentId) => {
-    const defaultUsername = "cooljmessy";
+    console.log(defaultUsername, loggedInUser);
     if (deletingId === commentId) return;
     setDeletingId(commentId);
     deleteComment(commentId)
@@ -73,6 +75,7 @@ export const CommentContainer = ({ articleId }) => {
             comment={comment}
             onDeleteComment={handleDeleteComment}
             deleting={deletingId === comment.comment_id}
+            loggedInUser={loggedInUser}
           />
         ))
       ) : (
