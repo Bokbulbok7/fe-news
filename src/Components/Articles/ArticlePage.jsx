@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../../api";
+import { getArticleById, patchArticle } from "../../api";
 import { CommentContainer } from "../Comments/CommentsContainer";
 
 export const ArticlePage = () => {
   const { articleId } = useParams();
   const [article, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [votes, setVotes] = useState(0);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -14,6 +16,7 @@ export const ArticlePage = () => {
       .then((articleData) => {
         setArticle(articleData);
         setIsLoading(false);
+        setVotes(articleData?.votes || 0);
       })
       .catch((error) => {
         console.error("Error fetching article:", error);
@@ -24,6 +27,7 @@ export const ArticlePage = () => {
   if (isLoading) {
     return <h3>Loading...</h3>;
   }
+
   const formattedDate = new Date(article.created_at).toLocaleDateString(
     "en-UK",
     {
@@ -32,6 +36,23 @@ export const ArticlePage = () => {
       day: "numeric",
     }
   );
+
+  const handleVote = (increment) => {
+    const updatedVotes = increment ? article.votes + 1 : article.votes - 1;
+    setArticle({ ...article, votes: updatedVotes });
+    patchArticle(article.article_id, { inc_votes: increment ? 1 : -1 })
+      .then((newVoteCount) => {
+        if (newVoteCount !== updatedVotes) {
+          setArticle({ ...article, votes: newVoteCount });
+        }
+      })
+      .catch((error) => {
+        console.error("Error voting:", error);
+        setArticle({ ...article, votes: article.votes });
+        setError("Something went wrong. Please try again later.");
+      });
+  };
+
   return (
     <div className="ArticlePage">
       <h1>{article.title}</h1>
@@ -42,6 +63,9 @@ export const ArticlePage = () => {
       <p>{article.body}</p>
       <p>Number of votes: {article.votes}</p>
       <p>Comments: {article.comment_count}</p>
+      {error && <p className="error-message">{error}</p>}
+      <button onClick={() => handleVote(true)}>Upvote</button>
+      <button onClick={() => handleVote(false)}>Downvote</button>
       <CommentContainer articleId={article.article_id} />
     </div>
   );
