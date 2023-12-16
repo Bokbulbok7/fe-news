@@ -2,8 +2,11 @@ import axios from "axios";
 
 const api = axios.create({ baseURL: `https://news-4iag.onrender.com/api` });
 
-export const getArticles = () => {
-  return api.get("/articles").then((response) => {
+export const getArticles = (topicSlug) => {
+  console.log(topicSlug);
+  const query = topicSlug ? `?topic=${topicSlug}` : "";
+  return api.get(`/articles${query}`).then((response) => {
+    console.log(topicSlug);
     return response.data.articles;
   });
 };
