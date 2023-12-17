@@ -46,6 +46,18 @@ export const postComment = (articleId, newComment) => {
     });
 };
 
+export const patchArticle = (articleId, increment) => {
+  return api
+    .patch(`/articles/${articleId}`, increment)
+    .then((response) => {
+      return response.data.article.votes;
+    })
+    .catch((error) => {
+      console.error("Error voting:", error);
+      throw error;
+    });
+};
+
 export const deleteComment = (commentId) => {
   return api
     .delete(`/comments/${commentId}`)
