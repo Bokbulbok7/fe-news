@@ -1,6 +1,6 @@
 import "./App.css";
 import { ArticleContainer } from "./Components/Articles/ArticleContainer";
-import { TopicContainer } from "./Components/TopicContainer/TopicContainer";
+import { TopicContainer } from "./Components/Topics/TopicContainer";
 import { Profile } from "./Components/Users/Profile";
 import { Homepage } from "./Components/Homepage";
 import { Header } from "./Components/Header";
@@ -18,6 +18,7 @@ function App() {
         <Route path="/articles" element={<ArticleContainer />} />
         <Route path="/articles/:articleId" element={<ArticlePage />} />
         <Route path="/topics" element={<TopicContainer />} />
+        <Route path="/topics/:topic" element={<ArticleContainer />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </>

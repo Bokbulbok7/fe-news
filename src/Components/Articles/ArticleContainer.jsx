@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./ArticlesList";
 import { getArticles } from "../../api";
+import { useParams } from "react-router-dom";
 
 export const ArticleContainer = () => {
   const [articles, setArticles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const { topic } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles()
+    getArticles(topic)
       .then((articlesData) => {
         setArticles(articlesData);
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);
+        setIsLoading(false);
       });
-  }, []);
+  }, [topic]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
