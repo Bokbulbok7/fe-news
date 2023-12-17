@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Comment } from "./Comment";
 import { AddComment } from "./AddComment";
 import { getCommentsByArticleId, postComment } from "../../api"; // Replace with your API functions
+import Error from "../../Error";
 
 export const CommentContainer = ({ articleId }) => {
   const [comments, setComments] = useState([]);
@@ -18,11 +19,16 @@ export const CommentContainer = ({ articleId }) => {
       .catch((error) => {
         console.error("Error fetching comments:", error);
         setIsLoading(false);
+        setError("Error fetching comments. Please try again later.");
       });
   }, [articleId]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
+  }
+
+  if (error) {
+    return <Error message={error} />;
   }
 
   const handleAddComment = (newComment) => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, patchArticle } from "../../api";
 import { CommentContainer } from "../Comments/CommentsContainer";
+import Error from "../../Error";
 
 export const ArticlePage = () => {
   const { articleId } = useParams();
@@ -21,11 +22,16 @@ export const ArticlePage = () => {
       .catch((error) => {
         console.error("Error fetching article:", error);
         setIsLoading(false);
+        setError("Error fetching article. Please try again later.");
       });
   }, [articleId]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
+  }
+
+  if (error) {
+    return <Error message={error} />;
   }
 
   const formattedDate = new Date(article.created_at).toLocaleDateString(

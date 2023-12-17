@@ -7,6 +7,7 @@ import { Header } from "./Components/Header";
 import { NavBar } from "./Components/Navbar";
 import { Route, Routes } from "react-router";
 import { ArticlePage } from "./Components/Articles/ArticlePage";
+import Error from "./Error";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/topics" element={<TopicContainer />} />
         <Route path="/topics/:topic" element={<ArticleContainer />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<Error message="Route not found." />} />
       </Routes>
     </>
   );

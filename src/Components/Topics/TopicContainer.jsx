@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getTopics } from "../../api";
+import Error from "../../Error";
 
 export const TopicContainer = () => {
   const [topics, setTopics] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getTopics()
@@ -12,8 +14,13 @@ export const TopicContainer = () => {
       })
       .catch((error) => {
         console.error("Error fetching topics:", error);
+        setError("Error fetching topics. Please try again later.");
       });
   }, []);
+
+  if (error) {
+    return <Error message={error} />;
+  }
 
   return (
     <div>
